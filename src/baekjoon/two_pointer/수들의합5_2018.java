@@ -1,4 +1,4 @@
-package baekjoon.prefix_sum;
+package baekjoon.two_pointer;
 
 import java.util.Scanner;
 
