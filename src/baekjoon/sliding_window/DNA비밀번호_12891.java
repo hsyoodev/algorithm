@@ -19,7 +19,7 @@ public class DNA비밀번호_12891 {
         // DNA 문자열의 길이 S
         int S = Integer.parseInt(st.nextToken());
         // 부분문자열의 길이 M
-        int M = Integer.parseInt(st.nextToken());
+        int P = Integer.parseInt(st.nextToken());
         // DNA 문자열 DNA
         String DNA = br.readLine();
         st = new StringTokenizer(br.readLine());
@@ -29,7 +29,7 @@ public class DNA비밀번호_12891 {
         }
         
         // 첫번째 0 ~ M 부분문자열 {'A', 'C', 'G', 'T'}의 개수 초기화
-        for (int i = 0; i < M; i++) {
+        for (int i = 0; i < P; i++) {
             V[getIndex(DNA.charAt(i))]++;
         }
         // 첫번째 0 ~ M 부분문자열 검증
@@ -38,9 +38,9 @@ public class DNA비밀번호_12891 {
         // 시작 인덱스
         int start = 0;
         // 끝 인덱스
-        int end = M - 1;
+        int end = P - 1;
         // 두번째부터 앞뒤부분만 -, +하면서 부분문자열 검증
-        for (int i = 1; i <= S - M; i++) {
+        for (int i = 1; i <= S - P; i++) {
             // 앞부분 -
             V[getIndex(DNA.charAt(start++))]--;
             // 뒷부분 +
@@ -66,7 +66,7 @@ public class DNA비밀번호_12891 {
     public static void verify() {
         int count = 0;
         for (int j = 0; j < 4; j++) {
-            if (R[j] == V[j]) {
+            if (R[j] <= V[j]) {
                 count++;
             }
         }
