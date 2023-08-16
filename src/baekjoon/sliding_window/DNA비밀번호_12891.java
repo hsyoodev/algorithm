@@ -48,6 +48,7 @@ public class DNA비밀번호_12891 {
         }
         System.out.print(answer);
     }
+    // {'A', 'C', 'G', 'T'}의 index 반환
     public static int getIndex(char c) {
         int index;
         if (c == 'A') {
@@ -61,6 +62,7 @@ public class DNA비밀번호_12891 {
         }
         return index;
     }
+    // {'A', 'C', 'G', 'T'} 검증
     public static void verify() {
         int count = 0;
         for (int j = 0; j < 4; j++) {
