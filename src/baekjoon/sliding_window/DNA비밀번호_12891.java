@@ -27,14 +27,12 @@ public class DNA비밀번호_12891 {
         for (int i = 0; i < 4; i++) {
             R[i] = Integer.parseInt(st.nextToken());
         }
-        
         // 첫번째 0 ~ M 부분문자열 {'A', 'C', 'G', 'T'}의 개수 초기화
         for (int i = 0; i < P; i++) {
             V[getIndex(DNA.charAt(i))]++;
         }
         // 첫번째 0 ~ M 부분문자열 검증
         verify();
-
         // 시작 인덱스
         int start = 0;
         // 끝 인덱스
@@ -51,7 +49,7 @@ public class DNA비밀번호_12891 {
         System.out.print(answer);
     }
     public static int getIndex(char c) {
-        int index = -1;
+        int index;
         if (c == 'A') {
             index = 0;
         } else if (c == 'C') {
