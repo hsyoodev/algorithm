@@ -30,7 +30,7 @@ public class 오큰수_17298 {
             // 현재 원소
             int curE = A[i];
             // stack이 비어있지않고 현재 stack이 가리키는 원소 < 현재 원소인경우에 pop 연산
-            while (!stack.isEmpty() && curE > stack.peek()) {
+            while (!stack.isEmpty() && curE >= stack.peek()) {
                 stack.pop();
             }
             NGES[i] = stack.isEmpty() ? -1 : stack.peek();
