@@ -5,7 +5,6 @@ import java.io.*;
 public class 수정렬하기2_2751 {
     private static int[] A;
     private static int[] M;
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -26,16 +25,13 @@ public class 수정렬하기2_2751 {
             return;
         }
 
-        int s1 = s;
         int s2 = ((s + e) / 2) + 1;
-        int mv1 = s1;
-        int mv2 = s2;
-        int m = s1;
-
-        mergesort(s1, s2 - 1);
+        mergesort(s, s2 - 1);
         mergesort(s2, e);
 
-        // 2개의 그룹 정렬하여 병합
+        int mv1 = s;
+        int mv2 = s2;
+        int m = s;
         while (m <= e) {
             if (mv1 < s2 && mv2 <= e) {
                 if (A[mv1] >= A[mv2]) {
@@ -56,6 +52,7 @@ public class 수정렬하기2_2751 {
             }
             m++;
         }
+
         for (int j = s; j <= e; j++) {
             A[j] = M[j];
         }
