@@ -52,7 +52,6 @@ public class 수정렬하기2_2751 {
             }
             m++;
         }
-
         for (int j = s; j <= e; j++) {
             A[j] = M[j];
         }
