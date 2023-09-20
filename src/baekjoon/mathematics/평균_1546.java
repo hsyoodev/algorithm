@@ -3,21 +3,21 @@ package baekjoon.mathematics;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.StringTokenizer;
-import java.util.stream.IntStream;
 
 public class 평균_1546 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int[] scores = IntStream.range(0,N)
-                .map(e->Integer.parseInt(st.nextToken()))
-                .sorted()
-                .toArray();
-        int M = scores[N - 1];
-        IntStream.of(scores)
-                .mapToDouble(e->e*100.0/M)
+        int[] scores = new int[N];
+        for (int i = 0; i < N; i++) {
+            scores[i] = Integer.parseInt(st.nextToken());
+        }
+        int max = Arrays.stream(scores).max().orElse(0);
+        Arrays.stream(scores)
+                .mapToDouble(e -> e * 100.0 / max)
                 .average()
                 .ifPresent(System.out::print);
     }
