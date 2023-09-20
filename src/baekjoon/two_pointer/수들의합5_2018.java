@@ -6,20 +6,21 @@ public class 수들의합5_2018 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int N = sc.nextInt();
-        int count = 1;
-        int sum = 0;
-        int start = 1;
-        for (int i = 1; i <= N; i++) {
-            if (sum > N) {
-                sum -= start++;
-                i--;
-                continue;
-            } else if (sum == N){
-                sum -= start++;
-                count++;
+        int answer = 1;
+        int startIndex = 1;
+        int endIndex = 2;
+        int maxIndex = (N / 2) + (N % 2);
+        int sum = startIndex + endIndex;
+        while (endIndex <= maxIndex) {
+            if (sum == N) {
+                answer++;
+                sum += (++endIndex - startIndex++);
+            } else if (sum < N) {
+                sum += ++endIndex;
+            } else {
+                sum -= startIndex++;
             }
-            sum += i;
         }
-        System.out.print(count);
+        System.out.print(answer);
     }
 }
