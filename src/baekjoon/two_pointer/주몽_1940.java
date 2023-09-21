@@ -11,18 +11,18 @@ public class 주몽_1940 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
         int M = Integer.parseInt(br.readLine());
-        int[] uniqueNumber = new int[N];
+        int[] ingredientNumbers = new int[N];
         StringTokenizer st = new StringTokenizer(br.readLine());
         for (int i = 0; i < N; i++) {
-            uniqueNumber[i] = Integer.parseInt(st.nextToken());
+            ingredientNumbers[i] = Integer.parseInt(st.nextToken());
         }
-        Arrays.sort(uniqueNumber);
+        Arrays.sort(ingredientNumbers);
         int startIndex = 0;
         int endIndex = N - 1;
         int sum = 0;
         int answer = 0;
         while (startIndex < endIndex) {
-            sum = uniqueNumber[startIndex] + uniqueNumber[endIndex];
+            sum = ingredientNumbers[startIndex] + ingredientNumbers[endIndex];
             if (sum < M) {
                 startIndex++;
             } else if (sum == M) {
