@@ -11,22 +11,22 @@ public class 최솟값찾기_11003 {
         int N = Integer.parseInt(st.nextToken());
         int L = Integer.parseInt(st.nextToken());
         st = new StringTokenizer(br.readLine());
-        int[] value = new int[N];
-        int[] result = new int[N];
-        ArrayDeque<Integer> deque = new ArrayDeque<>();
+        int[] numbers = new int[N];
+        int[] answer = new int[N];
+        ArrayDeque<Integer> arrayDeque = new ArrayDeque<>();
         for (int i = 0; i < N; i++) {
-            value[i] = Integer.parseInt(st.nextToken());
-            while (!deque.isEmpty() && value[deque.peekLast()] > value[i]) {
-                deque.pollLast();
+            numbers[i] = Integer.parseInt(st.nextToken());
+            while (!arrayDeque.isEmpty() && numbers[arrayDeque.peekLast()] > numbers[i]) {
+                arrayDeque.pollLast();
             }
-            deque.offerLast(i);
-            if (deque.peekFirst() <= i - L) {
-                deque.pollFirst();
+            arrayDeque.offerLast(i);
+            if (arrayDeque.peekFirst() <= i - L) {
+                arrayDeque.pollFirst();
             }
-            result[i] = value[deque.peekFirst()];
+            answer[i] = numbers[arrayDeque.peekFirst()];
         }
         for (int i = 0; i < N; i++) {
-            bw.write(result[i] + " ");
+            bw.write(answer[i] + " ");
         }
         bw.flush();
     }
