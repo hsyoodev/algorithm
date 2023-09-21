@@ -19,10 +19,9 @@ public class 주몽_1940 {
         Arrays.sort(ingredientNumbers);
         int startIndex = 0;
         int endIndex = N - 1;
-        int sum = 0;
         int answer = 0;
         while (startIndex < endIndex) {
-            sum = ingredientNumbers[startIndex] + ingredientNumbers[endIndex];
+            int sum = ingredientNumbers[startIndex] + ingredientNumbers[endIndex];
             if (sum < M) {
                 startIndex++;
             } else if (sum == M) {
