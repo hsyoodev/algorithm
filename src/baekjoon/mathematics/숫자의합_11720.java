@@ -7,8 +7,8 @@ public class 숫자의합_11720 {
         Scanner scanner = new Scanner(System.in);
         scanner.nextLine();
         int sum = scanner.next().chars()
-                .map(i -> i - '0')
-                .sum();
+                                .map(i -> i - '0')
+                                .sum();
         System.out.print(sum);
     }
 }
