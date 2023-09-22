@@ -9,14 +9,14 @@ public class 버블소트_1377 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
-        mData[] A = new mData[N];
+        Element[] elements = new Element[N];
         for (int i = 0; i < N; i++) {
-            A[i] = new mData(Integer.parseInt(br.readLine()), i);
+            elements[i] = new Element(Integer.parseInt(br.readLine()), i);
         }
-        Arrays.sort(A);
+        Arrays.sort(elements);
         int max = 0;
         for (int i = 0; i < N; i++) {
-            int diff = A[i].index - i;
+            int diff = elements[i].index - i;
             if (max < diff) {
                 max = diff;
             }
@@ -24,17 +24,18 @@ public class 버블소트_1377 {
         System.out.print(max + 1);
     }
 }
-class mData implements Comparable<mData> {
+
+class Element implements Comparable<Element> {
     public int value;
     public int index;
 
-    public mData(int value, int index) {
+    public Element(int value, int index) {
         this.value = value;
         this.index = index;
     }
 
     @Override
-    public int compareTo(mData o) {
-        return this.value - o.value;
+    public int compareTo(Element e) {
+        return this.value - e.value;
     }
 }
