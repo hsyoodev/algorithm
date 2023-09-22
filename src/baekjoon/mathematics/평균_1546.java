@@ -15,9 +15,7 @@ public class 평균_1546 {
         for (int i = 0; i < N; i++) {
             scores[i] = Integer.parseInt(st.nextToken());
         }
-        int max = Arrays.stream(scores)
-                .max()
-                .orElse(0);
+        int max = Arrays.stream(scores).max().orElse(0);
         Arrays.stream(scores)
                 .mapToDouble(e -> e * 100.0 / max)
                 .average()
