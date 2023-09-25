@@ -1,6 +1,8 @@
 package baekjoon.sorting;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class K번째수_11004 {
@@ -9,7 +11,6 @@ public class K번째수_11004 {
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         StringTokenizer st = new StringTokenizer(br.readLine());
         int N = Integer.parseInt(st.nextToken());
         K = Integer.parseInt(st.nextToken()) - 1;
@@ -18,91 +19,54 @@ public class K번째수_11004 {
         for (int i = 0; i < N; i++) {
             numbers[i] = Integer.parseInt(st.nextToken());
         }
-        quicksort(1, N - 1, 0);
-        bw.write(String.valueOf(numbers[K]));
-        bw.flush();
+        quicksort(0, N - 1);
+        System.out.print(numbers[K]);
     }
-    private static void quicksort(int s, int e, int p){
-        if (s > e) {
-            return;
-        }
-        int startIdx = s;
-        int endIdx = e;
-        int pivotIdx = p;
-        while (startIdx < endIdx) {
-            if (numbers[startIdx] > numbers[pivotIdx] && numbers[endIdx] < numbers[pivotIdx]) {
-                int temp = numbers[startIdx];
-                numbers[startIdx] = numbers[endIdx];
-                numbers[endIdx] = temp;
-                startIdx++;
-                endIdx--;
+
+    private static void quicksort(int startIndex, int endIndex) {
+        if (startIndex < endIndex) {
+            int insertIndex = partition(startIndex, endIndex);
+            if (insertIndex == K) {
+                return;
+            } else if (insertIndex > K) {
+                quicksort(startIndex, insertIndex - 1);
             } else {
-                if (numbers[startIdx] <= numbers[pivotIdx]) {
-                    startIdx++;
-                }
-                if (numbers[endIdx] >= numbers[pivotIdx]) {
-                    endIdx--;
-                }
+                quicksort(insertIndex + 1, endIndex);
             }
         }
-        int insertIdx = pivotIdx;
-        if (numbers[pivotIdx] > numbers[endIdx]) {
-            int temp = numbers[pivotIdx];
-            for (int i = pivotIdx; i < endIdx; i++) {
-                numbers[i] = numbers[i + 1];
+    }
+
+    private static int partition(int startIndex, int endIndex) {
+        if (startIndex + 1 == endIndex) {
+            if (numbers[startIndex] > numbers[endIndex]) {
+                swap(startIndex, endIndex);
             }
-            numbers[endIdx] = temp;
-            insertIdx = endIdx;
+            return endIndex;
         }
-        if (insertIdx == K) {
-            return;
-        } else if (insertIdx > K) {
-            quicksort(s, endIdx - 1, s - 1);
-        } else {
-            quicksort(insertIdx + 2, e, insertIdx + 1);
+        int middleIndex = (startIndex + endIndex) / 2;
+        swap(startIndex, middleIndex);
+        int moveStartIndex = startIndex + 1;
+        int moveEndIndex = endIndex;
+        int pivot = numbers[startIndex];
+        while (moveStartIndex <= moveEndIndex) {
+            while (pivot > numbers[moveStartIndex] && moveStartIndex < numbers.length - 1) {
+                moveStartIndex++;
+            }
+            while (pivot < numbers[moveEndIndex] && moveEndIndex > 0) {
+                moveEndIndex--;
+            }
+            if (moveStartIndex <= moveEndIndex) {
+                swap(moveStartIndex++, moveEndIndex--);
+            }
         }
+        numbers[startIndex] = numbers[moveEndIndex];
+        numbers[moveEndIndex] = pivot;
+        return moveEndIndex;
+    }
+
+    private static void swap(int swapIndex1, int swapIndex2) {
+        int temp = numbers[swapIndex1];
+        numbers[swapIndex1] = numbers[swapIndex2];
+        numbers[swapIndex2] = temp;
     }
 }
-
-
-//    private static int[] A = {42, 32, 24, 60, 15, 5, 90, 45};
-//
-//    public static void main(String[] args) {
-//        quicksort(1, A.length - 1, 0);
-//
-//        System.out.println(Arrays.toString(A));
-//    }
-//    private static void quicksort(int s, int e, int p){
-//        int startIdx = s;
-//        int endIdx = e;
-//        int pivotIdx = p;
-//
-//        if (startIdx > endIdx) {
-//            return;
-//        }
-//
-//        while (startIdx < endIdx) {
-//            if (A[startIdx] < A[pivotIdx]) {
-//                startIdx++;
-//            }
-//            if (A[endIdx] > A[pivotIdx]) {
-//                endIdx--;
-//            }
-//            if (A[startIdx] > A[pivotIdx] && A[endIdx] < A[pivotIdx]) {
-//                int temp = A[startIdx];
-//                A[startIdx] = A[endIdx];
-//                A[endIdx] = temp;
-//                startIdx++;
-//                endIdx--;
-//            }
-//        }
-//        int insertIdx = startIdx;
-//        if (A[pivotIdx] > A[insertIdx]) {
-//            for (int i = pivotIdx; i < insertIdx; i++) {
-//                A[i] = A[i + 1];
-//            }
-//            A[insertIdx] = A[pivotIdx];
-//        }
-//        quicksort(s, insertIdx - 1, s - 1);
-//        quicksort(insertIdx + 2, e, insertIdx + 1);
-//    }
