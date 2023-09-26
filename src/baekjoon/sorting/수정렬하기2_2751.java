@@ -34,8 +34,10 @@ public class 수정렬하기2_2751 {
         int moveStartIndex2 = splitStartIndex;
         int tempsIndex = startIndex;
         while (tempsIndex <= endIndex) {
-            boolean isStartIndex1 = moveStartIndex2 > endIndex || (moveStartIndex1 < splitStartIndex && numbers[moveStartIndex1] < numbers[moveStartIndex2]);
-            temps[tempsIndex++] = numbers[isStartIndex1 ? moveStartIndex1++ : moveStartIndex2++];
+            boolean isMoveStartIndex1 = moveStartIndex2 > endIndex ||
+                    (moveStartIndex1 < splitStartIndex &&
+                            numbers[moveStartIndex1] <= numbers[moveStartIndex2]);
+            temps[tempsIndex++] = numbers[isMoveStartIndex1 ? moveStartIndex1++ : moveStartIndex2++];
         }
         for (int j = startIndex; j <= endIndex; j++) {
             numbers[j] = temps[j];
