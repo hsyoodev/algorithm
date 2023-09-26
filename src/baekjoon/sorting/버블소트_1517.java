@@ -6,57 +6,45 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class 버블소트_1517 {
-    private static int[] A;
-    private static int[] M;
+    private static int[] numbers;
+    private static int[] temps;
     private static long swap = 0;
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
         StringTokenizer st = new StringTokenizer(br.readLine());
-        A = new int[N + 1];
-        M = new int[N + 1];
+        numbers = new int[N + 1];
+        temps = new int[N + 1];
         for (int i = 1; i <= N; i++) {
-            A[i] = Integer.parseInt(st.nextToken());
+            numbers[i] = Integer.parseInt(st.nextToken());
         }
         mergesort(1, N);
         System.out.print(swap);
     }
 
-    private static void mergesort(int s, int e) {
-        if (s == e) {
+    private static void mergesort(int startIndex, int endIndex) {
+        if (startIndex == endIndex) {
             return;
         }
-
-        int s2 = ((s + e) / 2) + 1;
-        mergesort(s, s2 - 1);
-        mergesort(s2, e);
-
-        int mv1 = s;
-        int mv2 = s2;
-        int m = s;
-        while (m <= e) {
-            if (mv1 < s2 && mv2 <= e) {
-                if (A[mv1] > A[mv2]) {
-                    M[m] = A[mv2];
-                    swap += mv2 - m;
-                    mv2++;
-                } else {
-                    M[m] = A[mv1];
-                    mv1++;
-                }
-            } else {
-                if (mv1 >= s2 && mv2 <= e) {
-                    M[m] = A[mv2];
-                    mv2++;
-                } else {
-                    M[m] = A[mv1];
-                    mv1++;
-                }
+        int splitEndIndex = ((startIndex + endIndex) / 2);
+        int splitStartIndex = splitEndIndex + 1;
+        mergesort(startIndex, splitEndIndex);
+        mergesort(splitStartIndex, endIndex);
+        int moveStartIndex1 = startIndex;
+        int moveStartIndex2 = splitStartIndex;
+        int tempsIndex = startIndex;
+        while (tempsIndex <= endIndex) {
+            boolean isMoveStartIndex1 = moveStartIndex2 > endIndex ||
+                    (moveStartIndex1 < splitStartIndex &&
+                            numbers[moveStartIndex1] <= numbers[moveStartIndex2]);
+            if (!isMoveStartIndex1) {
+                swap += moveStartIndex2 - tempsIndex;
             }
-            m++;
+            temps[tempsIndex++] = numbers[isMoveStartIndex1 ? moveStartIndex1++ : moveStartIndex2++];
         }
-        for (int j = s; j <= e; j++) {
-            A[j] = M[j];
+        for (int j = startIndex; j <= endIndex; j++) {
+            numbers[j] = temps[j];
         }
     }
 }
