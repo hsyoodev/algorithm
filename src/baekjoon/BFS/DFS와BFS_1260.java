@@ -3,12 +3,10 @@ package baekjoon.BFS;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.PriorityQueue;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class DFS와BFS_1260 {
-    static Queue<Integer>[] adjacencyList;
+    static List<Integer>[] adjacencyList;
     static boolean[] visitied;
 
     static StringBuilder answer = new StringBuilder();
@@ -19,30 +17,31 @@ public class DFS와BFS_1260 {
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
         int V = Integer.parseInt(st.nextToken());
-        adjacencyList = new Queue[N + 1];
-        visitied = new boolean[N + 1];
+        adjacencyList = new ArrayList[N + 1];
         for (int i = 1; i < N + 1; i++) {
-            adjacencyList[i] = new PriorityQueue<>();
+            adjacencyList[i] = new ArrayList<>();
         }
         for (int i = 0; i < M; i++) {
             st = new StringTokenizer(br.readLine());
             int node1 = Integer.parseInt(st.nextToken());
             int node2 = Integer.parseInt(st.nextToken());
-            adjacencyList[node1].offer(node2);
-            adjacencyList[node2].offer(node1);
+            adjacencyList[node1].add(node2);
+            adjacencyList[node2].add(node1);
         }
-        DFS(V);
-        System.out.println(answer);
-        answer = new StringBuilder();
+        for (int i = 1; i < N + 1; i++) {
+            Collections.sort(adjacencyList[i]);
+        }
         visitied = new boolean[N + 1];
+        DFS(V);
+        Arrays.fill(visitied, false);
+        answer.append("\n");
         BFS(V);
-        System.out.println(answer);
+        System.out.print(answer);
     }
 
     static void DFS(int node) {
         visitied[node] = true;
         answer.append(node + " ");
-
         for (int adjacencyNode : adjacencyList[node]) {
             if (!visitied[adjacencyNode]) {
                 DFS(adjacencyNode);
@@ -51,15 +50,18 @@ public class DFS와BFS_1260 {
     }
 
     static void BFS(int node) {
-        for (int adjacencyNode : adjacencyList[node]) {
-            if (!visitied[adjacencyNode]) {
-                visitied[adjacencyNode] = true;
-                answer.append(adjacencyNode + " ");
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(node);
+        visitied[node] = true;
+        while (!queue.isEmpty()) {
+            int visitedNode = queue.poll();
+            answer.append(visitedNode + " ");
+            for (int adjacencyNode : adjacencyList[visitedNode]) {
+                if (!visitied[adjacencyNode]) {
+                    visitied[adjacencyNode] = true;
+                    queue.add(adjacencyNode);
+                }
             }
-        }
-
-        for (int adjacencyNode : adjacencyList[node]) {
-            BFS(adjacencyNode);
         }
     }
 }
