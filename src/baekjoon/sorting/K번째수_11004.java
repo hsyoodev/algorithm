@@ -23,50 +23,57 @@ public class K번째수_11004 {
         System.out.print(numbers[K]);
     }
 
-    private static void quicksort(int startIndex, int endIndex) {
+    static void quicksort(int startIndex, int endIndex) {
         if (startIndex < endIndex) {
-            int insertIndex = partition(startIndex, endIndex);
-            if (insertIndex == K) {
+            int pivotIndex = partition(startIndex, endIndex);
+            if (pivotIndex == K) {
                 return;
-            } else if (insertIndex > K) {
-                quicksort(startIndex, insertIndex - 1);
+            } else if (pivotIndex > K) {
+                quicksort(startIndex, pivotIndex - 1);
             } else {
-                quicksort(insertIndex + 1, endIndex);
+                quicksort(pivotIndex + 1, endIndex);
             }
         }
     }
 
-    private static int partition(int startIndex, int endIndex) {
+    static int partition(int startIndex, int endIndex) {
         if (startIndex + 1 == endIndex) {
             if (numbers[startIndex] > numbers[endIndex]) {
-                swap(startIndex, endIndex);
+                int temp = numbers[startIndex];
+                numbers[startIndex] = numbers[endIndex];
+                numbers[endIndex] = temp;
             }
             return endIndex;
         }
         int middleIndex = (startIndex + endIndex) / 2;
-        swap(startIndex, middleIndex);
-        int moveStartIndex = startIndex + 1;
+        swap(middleIndex, startIndex);
+        int pivotIndex = startIndex;
+        int moveStartIndex = pivotIndex + 1;
         int moveEndIndex = endIndex;
-        int pivot = numbers[startIndex];
-        while (moveStartIndex <= moveEndIndex) {
-            while (pivot > numbers[moveStartIndex] && moveStartIndex < numbers.length - 1) {
+        while (moveStartIndex < moveEndIndex) {
+            while (numbers[moveStartIndex] < numbers[pivotIndex] && moveStartIndex < endIndex) {
                 moveStartIndex++;
             }
-            while (pivot < numbers[moveEndIndex] && moveEndIndex > 0) {
+            while (numbers[moveEndIndex] > numbers[pivotIndex] && moveEndIndex > startIndex + 1) {
                 moveEndIndex--;
             }
-            if (moveStartIndex <= moveEndIndex) {
+            if (moveStartIndex < moveEndIndex) {
                 swap(moveStartIndex++, moveEndIndex--);
+            } else if (moveStartIndex == moveEndIndex) {
+                if (numbers[pivotIndex] <= numbers[moveStartIndex]) {
+                    moveEndIndex--;
+                }
+                moveStartIndex++;
             }
         }
-        numbers[startIndex] = numbers[moveEndIndex];
-        numbers[moveEndIndex] = pivot;
-        return moveEndIndex;
+        swap(pivotIndex, moveEndIndex);
+        pivotIndex = moveEndIndex;
+        return pivotIndex;
     }
 
-    private static void swap(int swapIndex1, int swapIndex2) {
-        int temp = numbers[swapIndex1];
-        numbers[swapIndex1] = numbers[swapIndex2];
-        numbers[swapIndex2] = temp;
+    static void swap(int index1, int index2) {
+        int temp = numbers[index1];
+        numbers[index1] = numbers[index2];
+        numbers[index2] = temp;
     }
 }
