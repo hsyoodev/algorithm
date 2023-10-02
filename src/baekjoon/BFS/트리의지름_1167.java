@@ -4,12 +4,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class 트리의지름_1167 {
-    static ArrayList<Integer>[] adjacencyList;
+    static ArrayList<Node>[] adjacencyList;
     static boolean[] visited;
-    static long treeDiameter = 0;
+    static int treeDiameter;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -29,57 +31,36 @@ public class 트리의지름_1167 {
                     break;
                 }
                 int distance = Integer.parseInt(st.nextToken());
-                adjacencyList[node1].add(node2);
-                adjacencyList[node1].add(distance);
-                adjacencyList[node2].add(node1);
-                adjacencyList[node2].add(distance);
+                adjacencyList[node1].add(new Node(node2, distance));
+                adjacencyList[node2].add(new Node(node1, distance));
             }
         }
-        long max = 0;
-        for (int i = 1; i < V + 1; i++) {
-            int a = DFS(i, 0);
-            if (max < a) {
-                max = a;
-            }
-        }
-        System.out.print(max);
+        BFS(1);
+        System.out.print(treeDiameter);
     }
-    static int DFS(int node, int distance) {
-        if (visited[node]) {
-            return 0;
-        }
-        visited[node] = true;
-        int max = 0;
-        for (int i = 0; i < adjacencyList[node].size(); i+=2) {
-            if (!visited[adjacencyList[node].get(i)]) {
-                int a = DFS(adjacencyList[node].get(i),adjacencyList[node].get(i + 1));
-                if (max < a) {
-                    max = a;
+
+    static void BFS(int vertexNumber) {
+        Queue<Node> queue = new LinkedList<>();
+        queue.offer(new Node(vertexNumber, 0));
+        visited[vertexNumber] = true;
+        while (!queue.isEmpty()) {
+            Node currentNode = queue.poll();
+            for (Node adjacencyNode : adjacencyList[currentNode.vertexNumber]) {
+                if (!visited[adjacencyNode.vertexNumber]) {
+                    queue.offer(adjacencyNode);
+                    visited[adjacencyNode.vertexNumber] = true;
                 }
             }
         }
-        visited[node] = false;
-        max += distance;
-        return max;
     }
 }
 
-//    static void BFS(int node) {
-//        Queue<Integer> queue = new LinkedList<>();
-//        queue.offer(node);
-//        visited[node] = true;
-//        while (!queue.isEmpty()) {
-//            int adjacencyNode = queue.poll();
-//            long max = 0;
-//            for (int i = 0; i < adjacencyList[adjacencyNode].size(); i+=2) {
-//                if (!visited[adjacencyList[adjacencyNode].get(i)]) {
-//                    queue.offer(adjacencyList[adjacencyNode].get(i));
-//                    visited[adjacencyList[adjacencyNode].get(i)] = true;
-//                    if (max < adjacencyList[adjacencyNode].get(i + 1)) {
-//                        max = adjacencyList[adjacencyNode].get(i + 1);
-//                    }
-//                }
-//            }
-//            treeDiameter += max;
-//        }
-//    }
+class Node {
+    int vertexNumber;
+    int distance;
+
+    public Node(int vertexNumber, int distance) {
+        this.vertexNumber = vertexNumber;
+        this.distance = distance;
+    }
+}
