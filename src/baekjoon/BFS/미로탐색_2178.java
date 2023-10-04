@@ -7,8 +7,8 @@ import java.util.Scanner;
 public class 미로탐색_2178 {
     static int[][] maze;
     static boolean[][] visited;
-    static int[] directionX = {-1, 0, 1, 0};
-    static int[] directionY = {0, 1, 0, -1};
+    static int[] xOffset = {-1, 0, 1, 0};
+    static int[] yOffset = {0, 1, 0, -1};
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -27,20 +27,30 @@ public class 미로탐색_2178 {
     }
 
     static void BFS(int x, int y) {
-        Queue<int[]> queue = new LinkedList<>();
+        Queue<Coordinate> queue = new LinkedList<>();
         visited[x][y] = true;
-        queue.add(new int[]{x, y});
+        queue.add(new Coordinate(x, y));
         while (!queue.isEmpty()) {
-            int[] xy = queue.poll();
+            Coordinate coordinate = queue.poll();
             for (int i = 0; i < 4; i++) {
-                int targetX = xy[0] + directionX[i];
-                int targetY = xy[1] + directionY[i];
-                if (!visited[targetX][targetY] && maze[targetX][targetY] != 0) {
-                    maze[targetX][targetY] += maze[xy[0]][xy[1]];
-                    visited[targetX][targetY] = true;
-                    queue.add(new int[]{targetX, targetY});
+                int adjacencyX = coordinate.x + xOffset[i];
+                int adjacencyY = coordinate.y + yOffset[i];
+                if (!visited[adjacencyX][adjacencyY] && maze[adjacencyX][adjacencyY] != 0) {
+                    maze[adjacencyX][adjacencyY] += maze[adjacencyX][adjacencyY];
+                    visited[adjacencyX][adjacencyY] = true;
+                    queue.add(new Coordinate(adjacencyX, adjacencyY));
                 }
             }
         }
+    }
+}
+
+class Coordinate {
+    int x;
+    int y;
+
+    public Coordinate(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 }
