@@ -1,36 +1,42 @@
 package baekjoon.binary_search;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class 수찾기_1920 {
-    private static int[] A;
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt();
-        A = new int[N];
+    static int[] numbers;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        numbers = new int[N];
+        StringTokenizer st = new StringTokenizer(br.readLine());
         for (int i = 0; i < N; i++) {
-            A[i] = sc.nextInt();
+            numbers[i] = Integer.parseInt(st.nextToken());
         }
-        Arrays.sort(A);
-        int M = sc.nextInt();
+        Arrays.sort(numbers);
+        int M = Integer.parseInt(br.readLine());
+        st = new StringTokenizer(br.readLine());
         for (int i = 0; i < M; i++) {
-            System.out.println(binarySearch(0, A.length - 1, sc.nextInt()));
+            int targetNumber = Integer.parseInt(st.nextToken());
+            binarySearch(0, N - 1, targetNumber);
         }
     }
-
-    private static int binarySearch(int start, int end, int target) {
-        if (start > end) {
-            return 0;
+    static void binarySearch(int startIndex, int endIndex, int targetNumber) {
+        if (startIndex > endIndex) {
+            System.out.println(0);
+            return;
         }
-        int middle = (end + start) / 2;
-        int value = A[middle];
-        if (value == target) {
-            return 1;
-        } else if (value < target) {
-            return binarySearch(middle + 1, end, target);
+        int middleIndex = (startIndex + endIndex) / 2;
+        int middleNumber = numbers[middleIndex];
+        if (middleNumber == targetNumber) {
+            System.out.println(1);
+        } else if (middleNumber > targetNumber){
+            binarySearch(startIndex, middleIndex - 1, targetNumber);
         } else {
-            return binarySearch(0, middle - 1, target);
+            binarySearch(middleIndex + 1, endIndex, targetNumber);
         }
     }
 }
