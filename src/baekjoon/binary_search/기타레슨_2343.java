@@ -3,45 +3,53 @@ package baekjoon.binary_search;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 public class 기타레슨_2343 {
-    static int[] numbers;
+    static int N;
     static int M;
+    static int[] numbers;
+    static int answer;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int N = Integer.parseInt(st.nextToken());
+        N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
         numbers = new int[N + 1];
         st = new StringTokenizer(br.readLine());
         int max = -1;
+        int sum = 0;
         for (int i = 1; i < N + 1; i++) {
             numbers[i] = Integer.parseInt(st.nextToken());
             if (max < numbers[i]) {
                 max = numbers[i];
             }
+            sum += numbers[i];
         }
-        Arrays.parallelPrefix(numbers, Integer::sum);
-        for (int i = 1; i < N - M; i++) {
-            if (numbers[i] > max) {
-                partition(i, N, 1);
-            }
-        }
+        bianrySearch(max, sum);
+        System.out.print(answer);
     }
 
-    static void partition(int startIndex, int endIndex, int depth) {
-        if (depth == M - 1) {
+    static void bianrySearch(int startValue, int endValue) {
+        if (startValue > endValue) {
             return;
         }
-        int middleIndex = (startIndex + endIndex) / 2;
-
-
-
-
-
-
+        int middleValue = (startValue + endValue) / 2;
+        int sum = 0;
+        int count = 0;
+        for (int i = 1; i < N + 1; i++) {
+            if (sum + numbers[i] > middleValue) {
+                count++;
+                sum = 0;
+            }
+            sum += numbers[i];
+        }
+        if (M >= ++count) {
+            answer = middleValue;
+            bianrySearch(startValue, middleValue - 1);
+        } else {
+            bianrySearch(middleValue + 1, endValue);
+        }
     }
 }
