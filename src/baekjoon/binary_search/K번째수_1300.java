@@ -3,23 +3,35 @@ package baekjoon.binary_search;
 import java.util.Scanner;
 
 public class K번째수_1300 {
+    static int N;
+    static int K;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int N = scanner.nextInt();
-        int K = scanner.nextInt();
-//        binarySearch(i, N);
+        N = scanner.nextInt();
+        K = scanner.nextInt();
+        binarySearchX(1, N);
     }
 
-    static void binarySearch(int startIndex, int endIndex) {
-        int j = (startIndex + endIndex) / 2;
-        int targetIndex = (i - 1) * N + j;
-        if (targetIndex == K) {
-            System.out.print(i * j);
-        } else if (targetIndex < K) {
-            binarySearch(j + 1, endIndex);
+    static void binarySearchX(int x1, int x2) {
+        int midX = (x1 + x2) / 2;
+        int prevX = midX - 1;
+        int nextX = midX + 1;
+        int minCount = (N * 2 * prevX) - (prevX * prevX) + 1;
+        int maxCount = minCount - 1 + (N - midX + 1) * 2 - 1;
+        if (K > maxCount) {
+            binarySearchX(nextX, x2);
+        } else if (K < minCount) {
+            binarySearchX(x1, prevX);
         } else {
-            binarySearch(startIndex, j - 1);
+            int count = minCount;
+            for (int i = midX; i <= N; i++) {
+                if (K <= count) {
+                    System.out.print(midX * i);
+                    break;
+                }
+                count += 2;
+            }
         }
     }
 }
