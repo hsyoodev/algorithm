@@ -16,10 +16,20 @@ public class 파리퇴치_2001 {
                 }
             }
             int max = 0;
-            for (int i = 0; i < N; i++) {
-
+            for (int i = 0; i <= N - M; i++) {
+                for (int j = 0; j <= N - M; j++) {
+                    int sum = 0;
+                    for (int k = i; k < i + M; k++) {
+                        for (int l = j; l < j + M; l++) {
+                            sum += flyArea[k][l];
+                        }
+                    }
+                    if (max < sum) {
+                        max = sum;
+                    }
+                }
             }
+            System.out.printf("#%d %d\n", test_case, max);
         }
     }
-
 }
