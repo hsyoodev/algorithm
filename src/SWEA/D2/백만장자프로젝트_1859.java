@@ -1,6 +1,5 @@
 package SWEA.D2;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class 백만장자프로젝트_1859 {
@@ -9,26 +8,23 @@ public class 백만장자프로젝트_1859 {
         int T = sc.nextInt();
         for (int test_case = 1; test_case <= T; test_case++) {
             int N = sc.nextInt();
-            int[] dayOfPrice = new int[N];
-            int[] dayOfProfit = new int[N - 1];
+            int[] dailyPrices = new int[N];
             for (int i = 0; i < N; i++) {
-                dayOfPrice[i] = sc.nextInt();
+                dailyPrices[i] = sc.nextInt();
             }
-
-            int startDay = 0;
-            int endDay = N - 1;
-            while (startDay < endDay) {
-                int startPrice = dayOfPrice[startDay];
-                int endPrice = dayOfPrice[endDay];
-                int profit = endPrice - startPrice;
-                if (startPrice < endPrice) {
-                    if (dayOfProfit[startDay] < profit) {
-                        dayOfProfit[startDay] = profit;
+            int maxPrice = dailyPrices[N - 1];
+            long maxProfit = 0;
+            for (int i = N - 2; i >= 0 ; i--) {
+                int dailyPrice = dailyPrices[i];
+                if (maxPrice < dailyPrice) {
+                    maxPrice = dailyPrice;
+                } else {
+                    int dailyProfit = maxPrice - dailyPrice;
+                    if (dailyProfit > 0) {
+                        maxProfit += dailyProfit;
                     }
                 }
-                endDay--;
             }
-            int maxProfit = Arrays.stream(dayOfProfit).sum();
             System.out.printf("#%d %d\n", test_case, maxProfit);
         }
     }
