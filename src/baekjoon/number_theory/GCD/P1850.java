@@ -1,15 +1,14 @@
 package baekjoon.number_theory.GCD;
 
 import java.io.*;
-import java.util.StringTokenizer;
+import java.util.Scanner;
 
 public class P1850 {
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
+        Scanner scanner = new Scanner(System.in);
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        long A = Long.parseLong(st.nextToken());
-        long B = Long.parseLong(st.nextToken());
+        long A = scanner.nextLong();
+        long B = scanner.nextLong();
         long gcd = GCD(A, B);
         for (int i = 0; i < gcd; i++) {
             bw.write("1");
