@@ -3,9 +3,14 @@ package baekjoon.BFS;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.StringTokenizer;
 
 public class 트리의지름_1167 {
+
     static ArrayList<Node>[] adjacencyList;
     static boolean[] visited;
     static int[] distance;
@@ -19,9 +24,8 @@ public class 트리의지름_1167 {
         for (int i = 1; i < V + 1; i++) {
             adjacencyList[i] = new ArrayList<>();
         }
-        StringTokenizer st = null;
         for (int i = 0; i < V; i++) {
-            st = new StringTokenizer(br.readLine());
+            StringTokenizer st = new StringTokenizer(br.readLine());
             int node1 = Integer.parseInt(st.nextToken());
             while (true) {
                 int node2 = Integer.parseInt(st.nextToken());
@@ -33,33 +37,34 @@ public class 트리의지름_1167 {
                 adjacencyList[node2].add(new Node(node1, distance));
             }
         }
-        int vertexNumber = 1;
-        BFS(vertexNumber);
+        int vertex = 1;
+        BFS(vertex);
         for (int i = 1; i < V + 1; i++) {
-            if (distance[vertexNumber] < distance[i]) {
-                vertexNumber = i;
+            if (distance[vertex] < distance[i]) {
+                vertex = i;
             }
         }
         Arrays.fill(visited, false);
-        BFS(vertexNumber);
-        System.out.print(Arrays.stream(distance).max().getAsInt());
+        BFS(vertex);
+        int diameter = Arrays.stream(distance).max().getAsInt();
+        System.out.print(diameter);
     }
 
-    static void BFS(int vertexNumber) {
+    static void BFS(int vertex) {
         Queue<Node> queue = new LinkedList<>();
-        queue.offer(new Node(vertexNumber, 0));
-        visited[vertexNumber] = true;
+        queue.offer(new Node(vertex, 0));
+        visited[vertex] = true;
         while (!queue.isEmpty()) {
             Node currentNode = queue.poll();
-            int currentVertexNumber = currentNode.vertexNumber;
+            int currentVertex = currentNode.vertex;
             int currentDistance = currentNode.distance;
-            distance[currentVertexNumber] = currentDistance;
-            for (Node adjacencyNode : adjacencyList[currentVertexNumber]) {
-                int adjacencyVertexNumber = adjacencyNode.vertexNumber;
+            distance[currentVertex] = currentDistance;
+            for (Node adjacencyNode : adjacencyList[currentVertex]) {
+                int adjacencyVertex = adjacencyNode.vertex;
                 int adjacencyDistance = adjacencyNode.distance;
-                if (!visited[adjacencyVertexNumber]) {
-                    queue.offer(new Node(adjacencyVertexNumber, adjacencyDistance + currentDistance));
-                    visited[adjacencyVertexNumber] = true;
+                if (!visited[adjacencyVertex]) {
+                    queue.offer(new Node(adjacencyVertex, adjacencyDistance + currentDistance));
+                    visited[adjacencyVertex] = true;
                 }
             }
         }
@@ -67,11 +72,12 @@ public class 트리의지름_1167 {
 }
 
 class Node {
-    int vertexNumber;
+
+    int vertex;
     int distance;
 
-    public Node(int vertexNumber, int distance) {
-        this.vertexNumber = vertexNumber;
+    public Node(int vertex, int distance) {
+        this.vertex = vertex;
         this.distance = distance;
     }
 }
