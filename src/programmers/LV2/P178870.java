@@ -3,6 +3,7 @@ package programmers.LV2;
 import java.util.Arrays;
 
 public class P178870 {
+
     public static void main(String[] args) {
         int[] sequence = {1, 2, 3, 4, 5};
         int k = 7;
