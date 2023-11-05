@@ -13,11 +13,11 @@ public class P1744 {
         List<Integer> negativeNumbers = new ArrayList<>();
         List<Integer> positiveNumbers = new ArrayList<>();
         for (int i = 0; i < N; i++) {
-            int numbers = scanner.nextInt();
-            if (numbers <= 0) {
-                negativeNumbers.add(numbers);
+            int number = scanner.nextInt();
+            if (number <= 0) {
+                negativeNumbers.add(number);
             } else {
-                positiveNumbers.add(numbers);
+                positiveNumbers.add(number);
             }
         }
         Collections.sort(negativeNumbers);
