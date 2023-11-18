@@ -5,19 +5,19 @@ import java.util.Scanner;
 
 public class P1456 {
 
-    private static long A;
-    private static long B;
-    private static boolean[] isPrimeNumbers = new boolean[100000001];
-    private static int answer;
+    private static boolean[] isPrimeNumbers;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        A = scanner.nextLong();
-        B = scanner.nextLong();
+        long A = scanner.nextLong();
+        long B = scanner.nextLong();
+        isPrimeNumbers = new boolean[10000001];
+        Arrays.fill(isPrimeNumbers, true);
         eratos();
-        for (int i = 2; i < 10000001; i++) {
+        int answer = 0;
+        for (int i = 2; i < isPrimeNumbers.length; i++) {
             if (isPrimeNumbers[i]) {
-                for (long j = (long) i * i; j <= B; j *= i) {
+                for (double j = (double) i * i; j <= B; j *= i) {
                     if (j >= A) {
                         answer++;
                     }
@@ -28,12 +28,11 @@ public class P1456 {
     }
 
     private static void eratos() {
-        Arrays.fill(isPrimeNumbers, true);
-        for (int i = 2; i * i <= 10000000; i++) {
+        for (int i = 2; i * i < isPrimeNumbers.length; i++) {
             if (!isPrimeNumbers[i]) {
                 continue;
             }
-            for (int j = i * i; j <= 10000000; j += i) {
+            for (int j = i * i; j < isPrimeNumbers.length; j += i) {
                 isPrimeNumbers[j] = false;
             }
         }
