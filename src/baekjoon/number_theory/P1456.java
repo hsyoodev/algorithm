@@ -25,7 +25,7 @@ public class P1456 {
                 }
             }
         }
-        System.out.println(answer);
+        System.out.print(answer);
     }
 
     private static void eratos() {
