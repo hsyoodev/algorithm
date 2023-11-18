@@ -16,11 +16,12 @@ public class P1456 {
         eratos();
         int answer = 0;
         for (int i = 2; i < isPrimeNumbers.length; i++) {
-            if (isPrimeNumbers[i]) {
-                for (double j = (double) i * i; j <= B; j *= i) {
-                    if (j >= A) {
-                        answer++;
-                    }
+            if (!isPrimeNumbers[i]) {
+                continue;
+            }
+            for (double j = (double) i * i; j <= B; j *= i) {
+                if (j >= A) {
+                    answer++;
                 }
             }
         }
