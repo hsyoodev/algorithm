@@ -8,18 +8,23 @@ public class P1016 {
         Scanner scanner = new Scanner(System.in);
         long min = scanner.nextLong();
         long max = scanner.nextLong();
-        int sqrtMax = (int) Math.sqrt(max);
-        int notNoNoCount = 0;
-        for (int i = 2; i <= sqrtMax; i++) {
-            if (isPrimeNumber(i)) {
-                double powI = Math.pow(i, 2);
-                if (min <= powI) {
-                    notNoNoCount += (int) (max / powI);
-                    System.out.printf("%s %d\n", powI, (int) (max / powI));
+        boolean[] isNotNoNos = new boolean[(int) (max - min + 1)];
+
+        for (long i = 2; i * i <= max; i++) {
+            long powI = i * i;
+            for (long j = min / powI; powI * j <= max; j++) {
+                long number = powI * j;
+                if (number >= min) {
+                    isNotNoNos[(int) (number - min)] = true;
                 }
             }
         }
-        long answer = max - min + 1 - notNoNoCount;
+        int answer = 0;
+        for (boolean isNotNoNo : isNotNoNos) {
+            if (!isNotNoNo) {
+                answer++;
+            }
+        }
         System.out.print(answer);
     }
 }
