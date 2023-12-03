@@ -10,10 +10,14 @@ public class P1934 {
         for (int i = 0; i < T; i++) {
             int A = scanner.nextInt();
             int B = scanner.nextInt();
-            int GCD = getGCD(A, B);
-            int LCM = (A * B) / GCD;
-            System.out.println(LCM);
+            int LCM = getLCM(A, B);
+            System.out.print(LCM);
         }
+    }
+
+    private static int getLCM(int A, int B) {
+        int GCD = getGCD(A, B);
+        return (A * B) / GCD;
     }
 
     private static int getGCD(int A, int B) {
