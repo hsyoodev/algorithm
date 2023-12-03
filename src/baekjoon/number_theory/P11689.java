@@ -7,21 +7,18 @@ public class P11689 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         long n = scanner.nextLong();
-        long temp = n;
-        long answer = n;
+        long result = n;
         for (long i = 2; i * i <= n; i++) {
-            while (temp % i == 0) {
-                temp /= i;
-                answer -= temp;
+            if (n % i == 0) {
+                result -= (result / i);
+                while (n % i == 0) {
+                    n /= i;
+                }
             }
         }
-        if (temp != 1) {
-            if (temp == answer) {
-                answer -= (answer / temp);
-            } else {
-                answer += (answer / temp);
-            }
+        if (n > 1) {
+            result -= (result / n);
         }
-        System.out.print(answer);
+        System.out.print(result);
     }
 }
