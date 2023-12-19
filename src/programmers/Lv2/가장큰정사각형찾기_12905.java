@@ -1,6 +1,7 @@
-package programmers.LV2;
+package programmers.Lv2;
 
 public class 가장큰정사각형찾기_12905 {
+
     public static void main(String[] args) {
         int[][] board = {{0, 1, 1, 1}, {1, 1, 1, 1}, {1, 1, 1, 1}, {0, 0, 0, 1}};
         int answer = 0;
