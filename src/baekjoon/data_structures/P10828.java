@@ -14,11 +14,11 @@ public class P10828 {
         int N = Integer.parseInt(bufferedReader.readLine());
         // N개의 명령
         for (int i = 0; i < N; i++) {
-            String order = bufferedReader.readLine();
-            switch (order.split(" ")[0]) {
+            String[] order = bufferedReader.readLine().split(" ");
+            switch (order[0]) {
                 // push X: 정수 X를 스택에 넣는 연산이다.
                 case "push":
-                    stack.push(order.split(" ")[1]);
+                    stack.push(order[1]);
                     break;
                 // pop: 스택에서 가장 위에 있는 정수를 빼고, 그 수를 출력한다. 만약 스택에 들어있는 정수가 없는 경우에는 -1을 출력한다.
                 case "pop":
