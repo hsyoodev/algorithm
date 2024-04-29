@@ -10,10 +10,10 @@ public class P10816 {
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(System.out));
-        Map<Integer, Integer> map = new HashMap<>();
         // 숫자 카드의 개수
         int N = Integer.parseInt(bufferedReader.readLine());
         // 숫자 카드에 적혀있는 정수 갯수
+        Map<Integer, Integer> map = new HashMap<>();
         StringTokenizer stringTokenizer = new StringTokenizer(bufferedReader.readLine());
         for (int i = 0; i < N; i++) {
             int number = Integer.parseInt(stringTokenizer.nextToken());
