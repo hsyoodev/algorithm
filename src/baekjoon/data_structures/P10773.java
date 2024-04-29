@@ -9,8 +9,8 @@ import java.util.Stack;
 public class P10773 {
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        Stack<Integer> stack = new Stack<>();
         int K = Integer.parseInt(bufferedReader.readLine());
+        Stack<Integer> stack = new Stack<>();
         for (int i = 0; i < K; i++) {
             int number = Integer.parseInt(bufferedReader.readLine());
             // 정수가 0 일 경우에는 가장 최근에 쓴 수를 지우고,
