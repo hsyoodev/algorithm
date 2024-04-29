@@ -10,10 +10,10 @@ import java.util.Queue;
 public class P10845 {
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        LinkedList<String> queue = new LinkedList<>();
         // 명령의 수
         int N = Integer.parseInt(bufferedReader.readLine());
         // N개의 명령
+        LinkedList<String> queue = new LinkedList<>();
         for (int i = 0; i < N; i++) {
             String[] order = bufferedReader.readLine().split(" ");
             switch (order[0]) {
