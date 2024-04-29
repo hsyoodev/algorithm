@@ -9,10 +9,10 @@ public class P10866 {
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(System.out));
-        Deque<String> deque = new ArrayDeque<>();
         // 명령의 수
         int N = Integer.parseInt(bufferedReader.readLine());
         // N개의 명령
+        Deque<String> deque = new ArrayDeque<>();
         for (int i = 0; i < N; i++) {
             String[] order = bufferedReader.readLine().split(" ");
             switch (order[0]) {
