@@ -11,6 +11,7 @@ public class P1158 {
         int N = scanner.nextInt();
         // 양의 정수 K
         int K = scanner.nextInt();
+        // N명의 사람이 원을 이루면서 앉아있고
         ArrayList<Integer> numbers = new ArrayList<>();
         for (int i = 1; i <= N; i++) {
             numbers.add(i);
