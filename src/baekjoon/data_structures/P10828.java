@@ -9,10 +9,10 @@ import java.util.Stack;
 public class P10828 {
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        Stack<String> stack = new Stack<>();
         // 명령의 수
         int N = Integer.parseInt(bufferedReader.readLine());
         // N개의 명령
+        Stack<String> stack = new Stack<>();
         for (int i = 0; i < N; i++) {
             String[] order = bufferedReader.readLine().split(" ");
             switch (order[0]) {
