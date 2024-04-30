@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
-import java.util.Queue;
 
 // https://www.acmicpc.net/problem/10845
 public class P10845 {
