@@ -29,5 +29,6 @@ public class P10816 {
             bufferedWriter.write(" ");
         }
         bufferedWriter.flush();
+        bufferedWriter.close();
     }
 }
