@@ -30,8 +30,8 @@ public class P1764 {
         Map<String, Integer> answer = names.entrySet().stream()
                 .filter(e -> e.getValue() >= 2)
                 .collect(Collectors.toMap(
-                        e -> e.getKey(),
-                        e -> e.getValue()
+                        Map.Entry::getKey,
+                        Map.Entry::getValue
                 ));
         // 듣보잡 수
         System.out.println(answer.size());
