@@ -52,9 +52,7 @@ public class P5430 {
             // 에러가 발생한 경우에는 error를 출력
             if (isError) {
                 bufferedWriter.write("error");
-            }
-            // 입력으로 주어진 정수 배열에 함수를 수행한 결과
-            else {
+            } else {
                 bufferedWriter.write("[");
                 while (deque.size() > 1) {
                     bufferedWriter.write(isFlip ? deque.pollLast() : deque.pollFirst());
