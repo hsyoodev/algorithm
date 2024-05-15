@@ -1,19 +1,18 @@
 package baekjoon.data_structures;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.Scanner;
 import java.util.Stack;
 import java.util.stream.Collectors;
 
 // https://www.acmicpc.net/problem/9935
 public class P9935 {
     public static void main(String[] args) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+        Scanner scanner = new Scanner(System.in);
         // 첫째 줄에 문자열이 주어진다.
-        String str = bufferedReader.readLine();
+        String str = scanner.nextLine();
         // 둘째 줄에 폭발 문자열이 주어진다.
-        String bombStr = bufferedReader.readLine();
+        String bombStr = scanner.nextLine();
         // 폭발은 다음과 같은 과정으로 진행된다.
         // 1. 문자열이 폭발 문자열을 포함하고 있는 경우에, 모든 폭발 문자열이 폭발하게 된다. 남은 문자열을 순서대로 이어 붙여 새로운 문자열을 만든다.
         // 2. 새로 생긴 문자열에 폭발 문자열이 포함되어 있을 수도 있다.
