@@ -39,5 +39,6 @@ public class P9935 {
         System.out.print(stack.isEmpty() ? "FRULA" : stack.stream()
                 .map(String::valueOf)
                 .collect(Collectors.joining()));
+        scanner.close();
     }
 }
