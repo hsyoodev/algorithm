@@ -19,5 +19,6 @@ public class P11478 {
         }
         // 서로 다른 부분 문자열의 개수
         System.out.print(subS.size());
+        scanner.close();
     }
 }
