@@ -3,7 +3,9 @@ package baekjoon.data_structures;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.StringTokenizer;
 
 // https://www.acmicpc.net/problem/1269
 public class P1269 {
@@ -37,5 +39,6 @@ public class P1269 {
                 .count();
         // 대칭 차집합의 원소의 개수
         System.out.print(answer);
+        bufferedReader.close();
     }
 }
