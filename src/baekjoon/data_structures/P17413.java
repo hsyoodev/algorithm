@@ -16,12 +16,12 @@ public class P17413 {
         String S = bufferedReader.readLine();
         Deque<Character> deque = new ArrayDeque<>();
         Stack<Character> stack = new Stack<>();
-        boolean isStart = false;
+        boolean isLessThan = false;
         for (int i = 0; i < S.length(); i++) {
             char c = S.charAt(i);
             switch (c) {
                 case ' ':
-                    if (isStart) {
+                    if (isLessThan) {
                         deque.offer(c);
                     } else {
                         while (!deque.isEmpty()) {
@@ -31,7 +31,7 @@ public class P17413 {
                     }
                     break;
                 case '<':
-                    isStart = true;
+                    isLessThan = true;
                     deque.offer(c);
                     break;
                 case '>':
@@ -46,7 +46,7 @@ public class P17413 {
                         stringBuilder.append(stack.pop());
                     }
                     stringBuilder.append(c);
-                    isStart = false;
+                    isLessThan = false;
                     break;
                 default:
                     deque.offer(c);
