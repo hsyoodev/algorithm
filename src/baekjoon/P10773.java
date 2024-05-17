@@ -1,4 +1,4 @@
-package baekjoon.data_structures;
+package baekjoon;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -23,8 +23,8 @@ public class P10773 {
         }
         System.out.print(
                 stack.stream()
-                .mapToInt(Integer::intValue)
-                .sum()
+                        .mapToInt(Integer::intValue)
+                        .sum()
         );
     }
 }

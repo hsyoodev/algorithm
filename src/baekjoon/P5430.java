@@ -1,4 +1,4 @@
-package baekjoon.data_structures;
+package baekjoon;
 
 import java.io.*;
 import java.util.Deque;
