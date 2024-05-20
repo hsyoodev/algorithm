@@ -9,9 +9,9 @@ public class P10828 {
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(System.out));
+        Stack<String> stack = new Stack<>();
         // 명령의 수
         int N = Integer.parseInt(bufferedReader.readLine());
-        Stack<String> stack = new Stack<>();
         for (int i = 0; i < N; i++) {
             StringTokenizer stringTokenizer = new StringTokenizer(bufferedReader.readLine());
             String order = stringTokenizer.nextToken();
