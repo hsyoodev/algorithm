@@ -8,14 +8,14 @@ import java.util.Scanner;
 public class P1158 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Queue<Integer> persons = new LinkedList<>();
-        StringBuilder stringBuilder = new StringBuilder();
         int N = scanner.nextInt();
         int K = scanner.nextInt();
+        Queue<Integer> persons = new LinkedList<>();
         // 1번부터 N번까지 N명의 사람이 원을 이루면서 앉아있고,
         for (int i = 1; i <= N; i++) {
             persons.offer(i);
         }
+        StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("<");
         int number = 0;
         // N - 1명의 사람이 모두 제거될 때까지 계속
@@ -34,5 +34,6 @@ public class P1158 {
         stringBuilder.append(persons.poll());
         stringBuilder.append(">");
         System.out.print(stringBuilder);
+        scanner.close();
     }
 }
