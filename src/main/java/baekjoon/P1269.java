@@ -20,7 +20,6 @@ public class P1269 {
         // 집합 A
         Set<Integer> A = new HashSet<>();
         for (int i = 0; i < sizeOfA; i++) {
-
             A.add(Integer.parseInt(stringTokenizer.nextToken()));
         }
         stringTokenizer = new StringTokenizer(bufferedReader.readLine());
