@@ -12,7 +12,7 @@ public class P12954_x만큼_간격이_있는_n개의_숫자 {
         long[] answer = new long[n];
 
         for (int i = 1; i <= n; i++) {
-            answer[i - 1] = Long.parseLong(String.valueOf(x)) * i;
+            answer[i - 1] = (long) x * i;
         }
 
         return answer;
