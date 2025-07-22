@@ -11,4 +11,5 @@ public class P12916_문자열_내_p와_y의_개수 {
 
         return s.chars().filter(c -> c == 'p').count() == s.chars().filter(c -> c == 'y').count();
     }
+    
 }
