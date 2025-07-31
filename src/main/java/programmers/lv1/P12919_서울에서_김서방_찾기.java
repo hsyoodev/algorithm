@@ -5,7 +5,7 @@ import java.util.List;
 public class P12919_서울에서_김서방_찾기 {
 
     public static void main(String[] args) {
-        System.out.println(solution(new String[]{"Jane", "Kim"}));
+        System.out.print(solution(new String[]{"Jane", "Kim"}));
     }
 
     public static String solution(String[] seoul) {
