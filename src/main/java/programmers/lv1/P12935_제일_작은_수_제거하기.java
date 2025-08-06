@@ -10,10 +10,13 @@ public class P12935_제일_작은_수_제거하기 {
     }
 
     public static int[] solution(int[] arr) {
-        int min = Arrays.stream(arr).min().getAsInt();
-        int[] answer = Arrays.stream(arr).filter(factor -> factor != min).toArray();
+        if (arr.length == 1) {
+            return new int[]{-1};
+        }
 
-        return answer.length != 0 ? answer : new int[]{-1};
+        int min = Arrays.stream(arr).min().getAsInt();
+
+        return Arrays.stream(arr).filter(factor -> factor != min).toArray();
     }
 
 }
