@@ -1,6 +1,8 @@
 package programmers.lv1;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class P142086_가장_가까운_같은_글자 {
 
@@ -11,16 +13,12 @@ public class P142086_가장_가까운_같은_글자 {
 
     public static int[] solution(String s) {
         int[] answer = new int[s.length()];
-        String[] characters = s.split("");
+        Map<Character, Integer> map = new HashMap();
 
-        for (int i = 0; i < characters.length; i++) {
-            int findIndex = s.substring(0, i).lastIndexOf(characters[i]);
-
-            if (findIndex != -1) {
-                answer[i] = i - findIndex;
-            } else {
-                answer[i] = findIndex;
-            }
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            answer[i] = i - map.getOrDefault(c, i + 1);
+            map.put(c, i);
         }
 
         return answer;
