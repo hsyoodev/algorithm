@@ -12,18 +12,10 @@ public class P12926_시저_암호 {
 
     public static String solution(String s, int n) {
         String answer = s.chars().mapToObj(c -> {
-            if (c == 32) {
-                return Character.toString(c);
-            }
-
-            for (int i = 1; i <= n; i++) {
-                c += 1;
-
-                if (c == 91) {
-                    c = 65;
-                } else if (c == 123) {
-                    c = 97;
-                }
+            if (Character.isLowerCase((char) c)) {
+                c = 97 + (c + n - 97) % 26;
+            } else if (Character.isUpperCase((char) c)) {
+                c = 65 + (c + n - 65) % 26;
             }
 
             return Character.toString(c);
