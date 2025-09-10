@@ -14,7 +14,7 @@ public class P134240_푸드_파이트_대회 {
             sb.append(String.valueOf(i).repeat(food[i] / 2));
         }
 
-        return sb.toString() + "0" + sb.reverse().toString();
+        return sb + "0" + sb.reverse();
     }
 
 }
