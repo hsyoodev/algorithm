@@ -18,13 +18,11 @@ public class P42748_K번째수 {
             int i = commands[l][0];
             int j = commands[l][1];
             int k = commands[l][2];
+            int[] temp = Arrays.copyOfRange(array, i - 1, j);
 
-            answer[l] = Arrays.stream(array)
-                    .skip(i - 1).limit(j - i + 1)
-                    .sorted()
-                    .skip(k - 1).limit(1)
-                    .findFirst()
-                    .getAsInt();
+            Arrays.sort(temp);
+
+            answer[l] = temp[k - 1];
         }
 
         return answer;
