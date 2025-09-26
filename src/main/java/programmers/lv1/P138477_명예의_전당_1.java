@@ -1,9 +1,7 @@
 package programmers.lv1;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.PriorityQueue;
 
 public class P138477_명예의_전당_1 {
 
@@ -14,13 +12,16 @@ public class P138477_명예의_전당_1 {
 
     public static int[] solution(int k, int[] score) {
         int[] answer = new int[score.length];
-        List<Integer> list = new ArrayList<>();
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
 
         for (int i = 0; i < score.length; i++) {
-            list.add(score[i]);
-            list.sort(Collections.reverseOrder());
+            priorityQueue.offer(score[i]);
 
-            answer[i] = list.get(Math.min(i, k - 1));
+            if (priorityQueue.size() > k) {
+                priorityQueue.poll();
+            }
+
+            answer[i] = priorityQueue.peek();
         }
 
         return answer;
