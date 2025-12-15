@@ -8,7 +8,7 @@ public class P2178_미로_탐색 {
 
     private static int[][] miro;
     private static boolean[][] isVisited;
-    private static final int[][] points = {{0, 1}, {-1, 0}, {0, -1}, {1, 0}};
+    private static final int[][] directions = {{0, 1}, {-1, 0}, {0, -1}, {1, 0}};
     private static int N;
     private static int M;
 
@@ -29,36 +29,37 @@ public class P2178_미로_탐색 {
             }
         }
 
-        BFS(new int[]{0, 0});
+        BFS(0, 0);
 
         System.out.print(miro[N - 1][M - 1]);
 
         scanner.close();
     }
 
-    private static void BFS(int[] node) {
-        int answer = 0;
+    private static void BFS(int x, int y) {
         Queue<int[]> queue = new LinkedList<>();
 
-        queue.add(node);
+        queue.add(new int[]{x, y});
 
-        isVisited[node[0]][node[1]] = true;
+        isVisited[x][y] = true;
 
         while (!queue.isEmpty()) {
             int[] nowNode = queue.poll();
+            int nowX = nowNode[0];
+            int nowY = nowNode[1];
 
-            for (int[] point : points) {
-                int[] nextNode = {nowNode[0] + point[0], nowNode[1] + point[1]};
+            for (int[] direction : directions) {
+                int[] nextNode = {nowX + direction[0], nowY + direction[1]};
+                int nextX = nextNode[0];
+                int nextY = nextNode[1];
 
-                if (nextNode[0] >= 0 && nextNode[0] < N && nextNode[1] >= 0 && nextNode[1] < M) {
-                    if (miro[nextNode[0]][nextNode[1]] == 1) {
-                        if (!isVisited[nextNode[0]][nextNode[1]]) {
-                            queue.add(nextNode);
+                if (nextX >= 0 && nextX < N && nextY >= 0 && nextY < M) {
+                    if (miro[nextX][nextY] == 1 && !isVisited[nextX][nextY]) {
+                        queue.add(nextNode);
 
-                            isVisited[nextNode[0]][nextNode[1]] = true;
+                        isVisited[nextX][nextY] = true;
 
-                            miro[nextNode[0]][nextNode[1]] = miro[nowNode[0]][nowNode[1]] + 1;
-                        }
+                        miro[nextX][nextY] = miro[nextX][nextY] + 1;
                     }
                 }
             }
