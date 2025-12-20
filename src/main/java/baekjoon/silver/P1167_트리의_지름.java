@@ -11,7 +11,7 @@ public class P1167_트리의_지름 {
 
     private static boolean[] isVisited;
     private static ArrayList<Node>[] graph;
-    private static int max = 0;
+    private static Node maxNode;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -38,15 +38,15 @@ public class P1167_트리의_지름 {
             }
         }
 
-        for (int i = 1; i <= V; i++) {
-            if (!isVisited[i]) {
-                DFS(1, 0);
+        maxNode = new Node(1, 0);
 
-                Arrays.fill(isVisited, false);
-            }
-        }
+        DFS(1, 0);
 
-        System.out.print(max);
+        Arrays.fill(isVisited, false);
+
+        DFS(maxNode.number, 0);
+
+        System.out.print(maxNode.distance);
     }
 
     private static void DFS(int number, int distance) {
@@ -61,7 +61,9 @@ public class P1167_트리의_지름 {
             }
         }
 
-        max = Math.max(distance, max);
+        if (maxNode.distance < distance) {
+            maxNode = new Node(number, distance);
+        }
     }
 
 }
