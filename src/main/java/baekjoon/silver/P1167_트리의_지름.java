@@ -21,20 +21,20 @@ public class P1167_트리의_지름 {
 
         for (int i = 1; i <= V; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
-            int number = Integer.parseInt(st.nextToken());
+            int nowVertex = Integer.parseInt(st.nextToken());
 
-            graph[number] = new ArrayList<>();
+            graph[nowVertex] = new ArrayList<>();
 
             while (true) {
-                int a = Integer.parseInt(st.nextToken());
+                int nextVertex = Integer.parseInt(st.nextToken());
 
-                if (a == -1) {
+                if (nextVertex == -1) {
                     break;
                 }
 
-                int b = Integer.parseInt(st.nextToken());
+                int distance = Integer.parseInt(st.nextToken());
 
-                graph[number].add(new Node(a, b));
+                graph[nowVertex].add(new Node(nextVertex, distance));
             }
         }
 
@@ -44,7 +44,7 @@ public class P1167_트리의_지름 {
 
         Arrays.fill(isVisited, false);
 
-        DFS(maxNode.number, 0);
+        DFS(maxNode.vertex, 0);
 
         System.out.print(maxNode.distance);
     }
@@ -54,10 +54,9 @@ public class P1167_트리의_지름 {
 
         for (int i = 0; i < graph[number].size(); i++) {
             Node nextNode = graph[number].get(i);
-            int sumDistance = distance + nextNode.distance;
 
-            if (!isVisited[nextNode.number]) {
-                DFS(nextNode.number, sumDistance);
+            if (!isVisited[nextNode.vertex]) {
+                DFS(nextNode.vertex, distance + nextNode.distance);
             }
         }
 
@@ -70,11 +69,11 @@ public class P1167_트리의_지름 {
 
 class Node {
 
-    int number;
+    int vertex;
     int distance;
 
-    public Node(int number, int distance) {
-        this.number = number;
+    public Node(int vertex, int distance) {
+        this.vertex = vertex;
         this.distance = distance;
     }
 
