@@ -1,53 +1,43 @@
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
 
-    private static ArrayList<Integer>[] graph;
-    private static boolean[] isVisited;
-
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
         int N = scanner.nextInt();
-        int M = scanner.nextInt();
-        int answer = 0;
 
-        graph = new ArrayList[N + 1];
-        isVisited = new boolean[N + 1];
-
-        for (int i = 1; i <= N; i++) {
-            graph[i] = new ArrayList<Integer>();
-        }
-
-        for (int i = 0; i < M; i++) {
-            int u = scanner.nextInt();
-            int v = scanner.nextInt();
-
-            graph[u].add(v);
-            graph[v].add(u);
-        }
-
-        for (int i = 1; i <= N; i++) {
-            if (!isVisited[i]) {
-                DFS(i);
-
-                answer++;
+        for (int i = 2; i <= 9; i++) {
+            if (isPrimeNumber(i)) {
+                DFS(i, N);
             }
         }
-
-        System.out.print(answer);
     }
 
-    private static void DFS(int node) {
-        isVisited[node] = true;
+    private static void DFS(int number, int length) {
+        if (String.valueOf(number).length() == length) {
+            System.out.println(number);
 
-        for (int i = 0; i < graph[node].size(); i++) {
-            int nextNode = graph[node].get(i);
+            return;
+        }
 
-            if (!isVisited[nextNode]) {
-                DFS(nextNode);
+        for (int i = 1; i <= 9; i++) {
+            int nextNumber = Integer.parseInt(String.valueOf(number) + i);
+
+            if (isPrimeNumber(nextNumber)) {
+                DFS(nextNumber, length);
             }
         }
+    }
+
+    private static boolean isPrimeNumber(int number) {
+        for (int i = 2; i * i <= number; i++) {
+            if (number % i == 0) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
 }
