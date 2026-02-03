@@ -1,62 +1,50 @@
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.StringTokenizer;
 
 public class Main {
 
-    private static int N;
-    private static int M;
-    private static int[][] miro;
-    private static boolean[][] isVisited;
-    private static int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+    private static int[] A;
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        N = scanner.nextInt();
-        M = scanner.nextInt();
-
-        miro = new int[N][M];
-        isVisited = new boolean[N][M];
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        A = new int[N];
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
         for (int i = 0; i < N; i++) {
-            String st = scanner.next();
-
-            for (int j = 0; j < M; j++) {
-                miro[i][j] = Character.getNumericValue(st.charAt(j));
-            }
+            A[i] = Integer.parseInt(st.nextToken());
         }
 
-        BFS(0, 0);
+        Arrays.sort(A);
 
-        System.out.print(miro[N - 1][M - 1]);
+        int M = Integer.parseInt(br.readLine());
+        st = new StringTokenizer(br.readLine());
 
-        scanner.close();
+        for (int i = 0; i < M; i++) {
+            binarySearch(0, N - 1, Integer.parseInt(st.nextToken()));
+        }
+
+        br.close();
     }
 
-    private static void BFS(int x, int y) {
-        Queue<int[]> queue = new LinkedList<>();
+    private static void binarySearch(int startIndex, int endIndex, int target) {
+        if (startIndex < endIndex) {
+            System.out.println(0);
 
-        queue.add(new int[]{x, y});
-        isVisited[x][y] = true;
+            return;
+        }
 
-        while (!queue.isEmpty()) {
-            int[] node = queue.poll();
+        int middleIndex = (startIndex + endIndex) / 2;
 
-            for (int i = 0; i < 4; i++) {
-                int[] direction = directions[i];
-                int nextX = node[0] + direction[0];
-                int nextY = node[1] + direction[1];
-
-                if (nextX > -1 && nextX < N && nextY > -1 && nextY < M) {
-                    if (miro[nextX][nextY] == 1 && !isVisited[nextX][nextY]) {
-                        queue.add(new int[]{nextX, nextY});
-                        isVisited[nextX][nextY] = true;
-
-                        miro[nextX][nextY] += miro[node[0]][node[1]];
-                    }
-                }
-            }
+        if (A[middleIndex] > target) {
+            binarySearch(startIndex, middleIndex - 1, target);
+        } else if (A[middleIndex] < target) {
+            binarySearch(middleIndex + 1, endIndex, target);
+        } else {
+            System.out.println(1);
         }
     }
 
