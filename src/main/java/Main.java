@@ -1,66 +1,40 @@
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
-import java.util.stream.IntStream;
+import java.util.Scanner;
 
 public class Main {
 
-    private static int[] lectureLengths;
-    private static int M;
-    private static int answer;
-
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        int N = Integer.parseInt(st.nextToken());
-        M = Integer.parseInt(st.nextToken());
-        lectureLengths = new int[N];
+        Scanner scanner = new Scanner(System.in);
 
-        st = new StringTokenizer(br.readLine());
+        int N = scanner.nextInt();
+        int K = scanner.nextInt();
+        int[][] A = new int[N + 1][N + 1];
 
-        for (int i = 0; i < N; i++) {
-            lectureLengths[i] = Integer.parseInt(st.nextToken());
+        for (int i = 1; i < N + 1; i++) {
+            for (int j = 1; j < N + 1; j++) {
+                A[i][j] = i * j;
+            }
         }
 
-        int sum = IntStream.of(lectureLengths).sum();
-        int max = IntStream.of(lectureLengths).max().getAsInt();
-        answer = sum;
+        int start = 1;
+        int end = K;
 
-        binarySearch(max, sum);
+        while (start <= end) {
+            int middle = (start + end) / 2;
+            int count = 0;
 
-        System.out.print(answer);
-    }
-
-    private static void binarySearch(int start, int end) {
-        if (start > end) {
-            return;
-        }
-
-        int middle = (start + end) / 2;
-        int sum = 0;
-        int count = 0;
-
-        for (int lectureLength : lectureLengths) {
-            if (sum + lectureLength > middle) {
-                sum = 0;
-                count++;
+            for (int i = 1; i < N + 1; i++) {
+                count += Math.min(middle / i, N);
             }
 
-            sum += lectureLength;
+            if (count < K) {
+                start = middle + 1;
+            } else {
+                end = middle - 1;
+            }
         }
 
-        if (sum != 0) {
-            count++;
-        }
-
-        if (count <= M) {
-            answer = Math.min(answer, middle);
-
-            binarySearch(start, middle - 1);
-        } else {
-            binarySearch(middle + 1, end);
-        }
+        System.out.print(start);
     }
 
 }
