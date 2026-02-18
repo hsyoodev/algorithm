@@ -8,9 +8,9 @@ public class P1744_수_묶기 {
         Scanner scanner = new Scanner(System.in);
 
         int N = scanner.nextInt();
+        boolean hasZero = false;
         List<Integer> negative = new ArrayList<>();
         List<Integer> positive = new ArrayList<>();
-        boolean hasZero = false;
 
         for (int i = 0; i < N; i++) {
             int number = scanner.nextInt();
