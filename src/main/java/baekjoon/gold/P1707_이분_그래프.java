@@ -9,13 +9,12 @@ import java.util.StringTokenizer;
 public class P1707_이분_그래프 {
 
     private static ArrayList<Integer>[] graph;
-    private static String[] visited;
-    private static boolean isExsist = true;
-    private static String set = "A";
+    private static boolean[] isVisited;
+    private static int[] check;
+    private static boolean isExsist;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
         int K = Integer.parseInt(br.readLine());
 
         for (int i = 0; i < K; i++) {
@@ -24,6 +23,9 @@ public class P1707_이분_그래프 {
             int E = Integer.parseInt(st.nextToken());
 
             graph = new ArrayList[V + 1];
+            isVisited = new boolean[V + 1];
+            check = new int[V + 1];
+            isExsist = true;
 
             for (int j = 1; j < V + 1; j++) {
                 graph[j] = new ArrayList<>();
@@ -35,13 +37,13 @@ public class P1707_이분_그래프 {
                 int v = Integer.parseInt(st.nextToken());
 
                 graph[u].add(v);
+                graph[v].add(u);
             }
 
             for (int j = 1; j < V + 1; j++) {
-                visited = new String[V + 1];
-                DFS(j);
-
-                if (!isExsist) {
+                if (isExsist) {
+                    DFS(j);
+                } else {
                     break;
                 }
             }
@@ -51,20 +53,15 @@ public class P1707_이분_그래프 {
     }
 
     private static void DFS(int node) {
-        visited[node] = set;
-
-        if (set.equals("A")) {
-            set = "B";
-        } else {
-            set = "A";
-        }
+        isVisited[node] = true;
 
         for (int i = 0; i < graph[node].size(); i++) {
             int nextNode = graph[node].get(i);
 
-            if (visited[nextNode] == null) {
+            if (!isVisited[nextNode]) {
+                check[nextNode] = (check[node] + 1) % 2;
                 DFS(nextNode);
-            } else if (visited[node] == visited[nextNode]) {
+            } else if (check[node] == check[nextNode]) {
                 isExsist = false;
             }
         }
